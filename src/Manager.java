@@ -25,4 +25,5 @@ public class Manager extends Employee {
         }
         System.out.println("LOG: existing Employee fired (" + employee.name + ", " + employee.department + ", " + employee.title + ")");
     }
+
 }
