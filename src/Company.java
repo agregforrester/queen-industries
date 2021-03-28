@@ -203,6 +203,97 @@ public class Company {
         }
     }
 
+
+    public Director getDirector(String depart) {
+        for (Employee employee : this.staff) {
+            if (employee.department.equals(depart) && employee.title.startsWith("Director")) {
+                return (Director) employee;
+            }
+        }
+        return (Director) staff.get(0);
+    }
+
+    public Manager getManager(String title) {
+        for (Employee employee : this.staff) {
+            if (employee.title.equals(title)) {
+                return (Manager) employee;
+            }
+        }
+        return (Manager) staff.get(1);
+    }
+
+    public Employee getEmployee(String name) {
+        for (Employee employee : this.staff) {
+            if (employee.name.equals(name)) {
+                return employee;
+            }
+        }
+        return staff.get(0);
+    }
+
+    public void printOrganizationChart() {
+        staff.addAll(getDirector("Engineering").supervisedStaff);
+        staff.addAll(getDirector("Marketing").supervisedStaff);
+        staff.addAll(getDirector("Sales").supervisedStaff);
+
+        System.out.println(" ");
+        System.out.println("Queen Industries Organization Chart");
+        System.out.println(" - " + getDirector("Engineering").name + ", " + getDirector("Engineering").title);
+
+        if (staff.size() > 3) {
+            System.out.println("    - " + getManager("QA Manager").name + ", " + getManager("QA Manager").title);
+        }
+        for (Employee employee : getManager("QA Manager").supervisedStaff) {
+            System.out.println("       - " + employee.name + ", " + employee.title);
+        }
+
+        if (staff.size() > 3) {
+            System.out.println("    - " + getManager("Development Manager").name + ", " + getManager("Development Manager").title);
+        };
+
+        for (Employee employee : getManager("Development Manager").supervisedStaff) {
+            System.out.println("       - " + employee.name + ", " + employee.title);
+        }
+
+        System.out.println(" - " + getDirector("Marketing").name + ", " + getDirector("Marketing").title);
+
+        if (staff.size() > 3) {
+            System.out.println("    - " + getManager("Social Media Manager").name + ", " + getManager("Social Media Manager").title);
+        }
+
+        for (Employee employee : getManager("Social Media Manager").supervisedStaff) {
+            System.out.println("       - " + employee.name + ", " + employee.title);
+        }
+
+        System.out.println(" - " + getDirector("Sales").name + ", " + getDirector("Sales").title);
+
+        if (staff.size() > 3) {
+            System.out.println("    - " + getManager("Inside Sales Manager").name + ", " + getManager("Inside Sales Manager").title);
+        }
+
+        for (Employee employee : getManager("Inside Sales Manager").supervisedStaff) {
+            System.out.println("       - " + employee.name + ", " + employee.title);
+        }
+
+        if (staff.size() > 3) {
+            System.out.println("    - " + getManager("Outside Sales Manager").name + ", " + getManager("Outside Sales Manager").title);
+        }
+
+        for (Employee employee : getManager("Outside Sales Manager").supervisedStaff) {
+            System.out.println("       - " + employee.name + ", " + employee.title);
+        }
+
+        System.out.println(" ");
+    }
+
+    public void printEmployeeDetails(Employee employee) {
+        System.out.println("Employee       : " + employee.name);
+        System.out.println("Department     : " + employee.department);
+        System.out.println("Title          : " + employee.title);
+        System.out.println("Compensation   : " + employee.salary);
+        System.out.println(" ");
+    }
+
     /**
      * Main method executes tests. DO NOT MODIFY.
      *
