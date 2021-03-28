@@ -26,6 +26,7 @@ public class Director extends Manager {
     public void adjustSalary(int amount, Employee employee) {
         employee.salary += amount;
     }
+    
 }
 
 
